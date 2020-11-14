@@ -30070,6 +30070,7 @@ var styles = {
 function UploadPaste() {
     var _this = this;
     var _a = (0,react_hook_form__WEBPACK_IMPORTED_MODULE_1__.useForm)(), register = _a.register, handleSubmit = _a.handleSubmit, errors = _a.errors;
+    var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""), redirectTo = _b[0], setRedirectTo = _b[1];
     var onSubmit = function (data) { return __awaiter(_this, void 0, void 0, function () {
         var response, id, _a, _b;
         return __generator(this, function (_c) {
@@ -30090,10 +30091,15 @@ function UploadPaste() {
                 case 2:
                     id = _b.apply(_a, [(_c.sent()).value]);
                     console.log(id);
+                    setRedirectTo(id);
                     return [2 /*return*/];
             }
         });
     }); };
+    if (redirectTo != "") {
+        var path = "/" + redirectTo;
+        return react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Redirect, { to: path });
+    }
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", { onSubmit: handleSubmit(onSubmit) },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", { name: "pastedata", placeholder: "Enter your paste here...", rows: 60, cols: 120, ref: register({ required: true }) }),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null),

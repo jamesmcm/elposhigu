@@ -41,6 +41,7 @@ const styles = {
 
 export function UploadPaste() {
   const { register, handleSubmit, errors } = useForm<Inputs>();
+  const [redirectTo, setRedirectTo] = useState("");
   const onSubmit = async (data: Inputs) => {
     console.log(data);
 
@@ -56,7 +57,13 @@ export function UploadPaste() {
       (await response.body.getReader().read()).value
     );
     console.log(id);
+    setRedirectTo(id);
   };
+
+  if (redirectTo != "") {
+    const path: string = "/" + redirectTo;
+    return <Redirect to={path} />;
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
