@@ -1,3 +1,4 @@
+use actix_cors::Cors;
 use actix_web::{web, App, HttpResponse, HttpServer};
 use rusoto_core::Region;
 use rusoto_s3::{GetObjectRequest, PutObjectRequest, S3Client, S3};
@@ -106,7 +107,9 @@ async fn download_paste(s3_client: &S3Client, paste_id: String) -> anyhow::Resul
 async fn main() -> std::io::Result<()> {
     lazy_static::initialize(&TRACING);
     HttpServer::new(|| {
+        let cors = Cors::permissive().supports_credentials();
         App::new()
+            .wrap(cors)
             .wrap(TracingLogger)
             .route("/create", web::post().to(create))
             .route("/{paste_id}", web::get().to(read_paste))
