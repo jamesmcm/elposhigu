@@ -30077,7 +30077,7 @@ function UploadPaste() {
             switch (_c.label) {
                 case 0:
                     console.log(data);
-                    return [4 /*yield*/, fetch("http://127.0.0.1:8080/create", {
+                    return [4 /*yield*/, fetch("http://3.250.0.143:8080/create", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -30116,7 +30116,7 @@ function GetPaste() {
                 var response, bodytext, _a, _b;
                 return __generator(this, function (_c) {
                     switch (_c.label) {
-                        case 0: return [4 /*yield*/, fetch("http://127.0.0.1:8080/" + id, {
+                        case 0: return [4 /*yield*/, fetch("http://3.250.0.143:8080/" + id, {
                                 method: "GET",
                             })];
                         case 1:

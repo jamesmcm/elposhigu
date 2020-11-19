@@ -1,7 +1,7 @@
 FROM rust:1.47 as builder
 WORKDIR app
 # Copy over the cached dependencies
-COPY . .
+COPY backend .
 # Build our application, leveraging the cached deps!
 RUN cargo build --release
 
