@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  backend:
+    build: backend
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+    ports:
+      - "8080:8080"
+  frontend:
+    build:
+      context: tsfrontend
+      args:
+        - ARG_BACKEND_HOST=${BACKEND_HOST}
+    ports:
+      - "9090:9090"

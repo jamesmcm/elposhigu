@@ -13,6 +13,11 @@ import {
 //   <GetPaste />
 // </Route>
 
+// This is Backend Host address as seen from user browser
+const BACKEND_HOST = process.env.REACT_APP_BACKEND_HOST;
+
+const BACKEND_PORT = "8080";
+
 export default function App() {
   return (
     <Router>
@@ -45,13 +50,16 @@ export function UploadPaste() {
   const onSubmit = async (data: Inputs) => {
     console.log(data);
 
-    const response = await fetch("http://3.250.0.143:8080/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      },
-      body: "body=" + encodeURIComponent(data.pastedata),
-    });
+    const response = await fetch(
+      `http://${BACKEND_HOST}:${BACKEND_PORT}/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        },
+        body: "body=" + encodeURIComponent(data.pastedata),
+      }
+    );
 
     const id = new TextDecoder("utf-8").decode(
       (await response.body.getReader().read()).value
@@ -94,9 +102,12 @@ export function GetPaste() {
 
   useEffect(() => {
     async function get_paste(id: string) {
-      const response = await fetch("http://3.250.0.143:8080/" + id, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `http://${BACKEND_HOST}:${BACKEND_PORT}/` + id,
+        {
+          method: "GET",
+        }
+      );
 
       if (response.status == 500) {
         setRedirectHome(true);

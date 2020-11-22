@@ -46,10 +46,7 @@ export class CdkStack extends cdk.Stack {
           environment: {},
         },
         memoryLimitMiB: 512,
-        listenerPort: 8080,
-        publicLoadBalancer: true,
         assignPublicIp: true,
-        openListener: true,
       }
     );
 
